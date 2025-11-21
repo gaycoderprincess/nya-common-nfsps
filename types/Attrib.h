@@ -25,7 +25,7 @@ namespace Attrib {
 			((void(__thiscall*)(Instance*))0x5301F0)(this);
 		}
 
-		static inline auto GetData = (void*(__thiscall*)(Instance*, uint32_t attributeKey, uint32_t index))0x52B950;
+		static inline auto GetAttributePointer = (void*(__thiscall*)(Instance*, uint32_t attributeKey, uint32_t index))0x52B950;
 	};
 
 	auto FindCollection = (Collection*(__cdecl*)(uint32_t classKey, uint32_t collectionKey))0x52CD40;

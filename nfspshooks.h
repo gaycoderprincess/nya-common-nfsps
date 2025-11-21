@@ -2,6 +2,7 @@
 
 namespace NyaHooks {
 	std::vector<void(*)()> aEndSceneFuncs;
+	std::vector<void(*)()> aD3DResetFuncs;
 	std::vector<void(*)()> aWorldServiceFuncs;
 	std::vector<void(*)(HWND, UINT, WPARAM, LPARAM)> aWndProcFuncs;
 	bool bInputsBlocked = false;
@@ -12,6 +13,14 @@ namespace NyaHooks {
 			func();
 		}
 		return EndSceneOrig(a1);
+	}
+
+	auto D3DResetOrig = (void(*)())nullptr;
+	void D3DResetHook() {
+		for (auto& func : aD3DResetFuncs) {
+			func();
+		}
+		return D3DResetOrig();
 	}
 
 	auto WorldServiceOrig = (void(__cdecl*)())nullptr;
@@ -39,7 +48,7 @@ namespace NyaHooks {
 	void PlaceD3DHooks() {
 		if (!EndSceneOrig) {
 			EndSceneOrig = (uint32_t(__thiscall*)(void*))NyaHookLib::PatchRelative(NyaHookLib::CALL, 0x4B0A8F, &EndSceneHook);
-			//D3DResetOrig = (void(*)())NyaHookLib::PatchRelative(NyaHookLib::CALL, 0x5055AD, &D3DResetHook);
+			D3DResetOrig = (void(*)())NyaHookLib::PatchRelative(NyaHookLib::CALL, 0x4B0ACC, &D3DResetHook);
 		}
 	}
 
