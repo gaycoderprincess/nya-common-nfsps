@@ -71,4 +71,16 @@ namespace NyaHooks {
 			NyaHookLib::Patch(0x70E2B4, &WndProcHook);
 		}
 	}
+
+	auto GetVehicleKey_orig = (uint32_t(__thiscall*)(void*))nullptr;
+	uint32_t __thiscall GetVehicleKeyHooked(void* a1) {
+		if (!SkipFE) return GetVehicleKey_orig(a1);
+		return Attrib::StringHash32(SkipFEPlayerCar);
+	}
+
+	void PlaceSkipFEFixes() {
+		NyaHookLib::Patch<uint64_t>(0x4D4B41, 0x89F63300A9D97CA1);
+		GetVehicleKey_orig = (uint32_t(__thiscall*)(void*))(*(uintptr_t*)0x983050);
+		NyaHookLib::Patch(0x983050, &GetVehicleKeyHooked);
+	}
 }
