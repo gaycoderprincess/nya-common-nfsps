@@ -20,6 +20,7 @@ enum BLUEPRINT_NUMBER : uint32_t {
 };
 
 #include "types/bNode.h"
+#include "types/UMath.h"
 #include "types/Attrib.h"
 #include "types/Physics.h"
 #include "types/VinylSystem.h"
@@ -29,6 +30,13 @@ enum BLUEPRINT_NUMBER : uint32_t {
 #include "types/FeGarageMain.h"
 #include "types/UserProfile.h"
 #include "types/GameFlowManager.h"
+#include "types/RaceParameters.h"
+#include "types/TrackInfo.h"
+
+class RaceStarter {
+public:
+	static inline auto StartSkipFERace = (void(*)())0x74EFA0;
+};
 
 auto& SkipFE = *(bool*)0xBFBC08;
 auto& SkipFEForever = *(bool*)0xBFBC0C;

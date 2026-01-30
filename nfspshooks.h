@@ -1,86 +1,127 @@
 #include <vector>
 
 namespace NyaHooks {
-	std::vector<void(*)()> aEndSceneFuncs;
-	std::vector<void(*)()> aD3DResetFuncs;
-	std::vector<void(*)()> aWorldServiceFuncs;
-	std::vector<void(*)(HWND, UINT, WPARAM, LPARAM)> aWndProcFuncs;
-	bool bInputsBlocked = false;
-
-	auto EndSceneOrig = (uint32_t(__thiscall*)(void*))nullptr;
-	uint32_t __thiscall EndSceneHook(void* a1) {
-		for (auto& func : aEndSceneFuncs) {
-			func();
+	namespace D3DEndSceneHook {
+		std::vector<void(*)()> aFunctions;
+		
+		auto OrigFunction = (uint32_t(__thiscall*)(void*))nullptr;
+		uint32_t __thiscall HookedFunction(void* a1) {
+			for (auto& func : aFunctions) {
+				func();
+			}
+			return OrigFunction(a1);
 		}
-		return EndSceneOrig(a1);
-	}
-
-	auto D3DResetOrig = (void(*)())nullptr;
-	void D3DResetHook() {
-		for (auto& func : aD3DResetFuncs) {
-			func();
+		
+		void Init() {
+			if (OrigFunction) return;
+			OrigFunction = (uint32_t(__thiscall*)(void*))NyaHookLib::PatchRelative(NyaHookLib::CALL, 0x4B0A8F, &HookedFunction);
 		}
-		return D3DResetOrig();
 	}
+	
+	namespace D3DResetHook {
+		std::vector<void(*)()> aFunctions;
 
-	auto WorldServiceOrig = (void(__cdecl*)())nullptr;
-	void WorldServiceHook() {
-		for (auto& func : aWorldServiceFuncs) {
-			func();
+		auto OrigFunction = (void(*)())nullptr;
+		void HookedFunction() {
+			for (auto& func : aFunctions) {
+				func();
+			}
+			return OrigFunction();
 		}
-		return WorldServiceOrig();
-	}
 
-	auto InputBlockerOrig = (bool(__cdecl*)())nullptr;
-	bool InputBlockerHook() {
-		if (bInputsBlocked) return true;
-		return InputBlockerOrig();
-	}
 
-	auto WndProcOrig = (LRESULT(__stdcall*)(HWND, UINT, WPARAM, LPARAM))nullptr;
-	LRESULT __stdcall WndProcHook(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		for (auto& func : aWndProcFuncs) {
-			func(hWnd, msg, wParam, lParam);
+		void Init() {
+			if (OrigFunction) return;
+			OrigFunction = (void(*)())NyaHookLib::PatchRelative(NyaHookLib::CALL, 0x4B0ACC, &HookedFunction);
 		}
-		return WndProcOrig(hWnd, msg, wParam, lParam);
 	}
 
 	void PlaceD3DHooks() {
-		if (!EndSceneOrig) {
-			EndSceneOrig = (uint32_t(__thiscall*)(void*))NyaHookLib::PatchRelative(NyaHookLib::CALL, 0x4B0A8F, &EndSceneHook);
-			D3DResetOrig = (void(*)())NyaHookLib::PatchRelative(NyaHookLib::CALL, 0x4B0ACC, &D3DResetHook);
+		D3DEndSceneHook::Init();
+		D3DResetHook::Init();
+	}
+
+	namespace InputBlockerHook {
+		bool bInputsBlocked = false;
+
+		std::vector<void(*)()> aFunctions;
+
+		auto OrigFunction = (bool(*)())nullptr;
+		bool HookedFunction() {
+			if (bInputsBlocked) return true;
+			return OrigFunction();
+		}
+
+		void Init() {
+			if (OrigFunction) return;
+			OrigFunction = (bool(*)())NyaHookLib::PatchRelative(NyaHookLib::CALL, 0x6CA27D, &HookedFunction);
 		}
 	}
 
-	void PlaceWorldServiceHook() {
-		if (!WorldServiceOrig) {
-			WorldServiceOrig = (void(__cdecl*)())NyaHookLib::PatchRelative(NyaHookLib::CALL, 0x6DB068, &WorldServiceHook);
+	namespace WorldServiceHook {
+		std::vector<void(*)()> aFunctions;
+
+		auto OrigFunction = (void(*)())nullptr;
+		void HookedFunction() {
+			for (auto& func : aFunctions) {
+				func();
+			}
+			return OrigFunction();
+		}
+
+
+		void Init() {
+			if (OrigFunction) return;
+			OrigFunction = (void(*)())NyaHookLib::PatchRelative(NyaHookLib::CALL, 0x6DB068, &HookedFunction);
 		}
 	}
 
-	void PlaceInputBlockerHook() {
-		if (!InputBlockerOrig) {
-			// thanks to Xanvier for helping out with this one ^^
-			InputBlockerOrig = (bool(__cdecl*)())NyaHookLib::PatchRelative(NyaHookLib::CALL, 0x6CA27D, &InputBlockerHook);
+	namespace WndProcHook {
+		std::vector<void(*)(HWND, UINT, WPARAM, LPARAM)> aFunctions;
+
+		auto OrigFunction = (LRESULT(__stdcall*)(HWND, UINT, WPARAM, LPARAM))nullptr;
+		LRESULT __stdcall HookedFunction(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+			for (auto& func : aFunctions) {
+				func(hWnd, msg, wParam, lParam);
+			}
+			return OrigFunction(hWnd, msg, wParam, lParam);
+		}
+
+		void Init() {
+			if (OrigFunction) return;
+			OrigFunction = (LRESULT(__stdcall*)(HWND, UINT, WPARAM, LPARAM))(*(uintptr_t*)0x70E2B4);
+			NyaHookLib::Patch(0x70E2B4, &HookedFunction);
+		}
+	}
+	
+	namespace SimServiceHook {
+		std::vector<void(*)()> aFunctions;
+
+		auto OrigFunction = (void(__thiscall*)(void*))nullptr;
+		void __thiscall HookedFunction(void* a1) {
+			for (auto& func : aFunctions) {
+				func();
+			}
+			OrigFunction(a1);
+		}
+
+		void Init() {
+			if (OrigFunction) return;
+			OrigFunction = (void(__thiscall*)(void*))NyaHookLib::PatchRelative(NyaHookLib::CALL, 0x67E3C3, &HookedFunction);
 		}
 	}
 
-	void PlaceWndProcHook() {
-		if (!WndProcOrig) {
-			WndProcOrig = (LRESULT(__stdcall*)(HWND, UINT, WPARAM, LPARAM))(*(uintptr_t*)0x70E2B4);
-			NyaHookLib::Patch(0x70E2B4, &WndProcHook);
+	namespace SkipFEFixes {
+		auto GetVehicleKey_orig = (uint32_t(__thiscall*)(void*))nullptr;
+		uint32_t __thiscall GetVehicleKeyHooked(void* a1) {
+			if (!SkipFE) return GetVehicleKey_orig(a1);
+			return Attrib::StringHash32(SkipFEPlayerCar);
 		}
-	}
 
-	auto GetVehicleKey_orig = (uint32_t(__thiscall*)(void*))nullptr;
-	uint32_t __thiscall GetVehicleKeyHooked(void* a1) {
-		if (!SkipFE) return GetVehicleKey_orig(a1);
-		return Attrib::StringHash32(SkipFEPlayerCar);
-	}
-
-	void PlaceSkipFEFixes() {
-		NyaHookLib::Patch<uint64_t>(0x4D4B41, 0x89F63300A9D97CA1);
-		GetVehicleKey_orig = (uint32_t(__thiscall*)(void*))(*(uintptr_t*)0x983050);
-		NyaHookLib::Patch(0x983050, &GetVehicleKeyHooked);
+		void Init() {
+			NyaHookLib::Patch<uint64_t>(0x4D4B41, 0x89F63300A9D97CA1);
+			GetVehicleKey_orig = (uint32_t(__thiscall*)(void*))(*(uintptr_t*)0x983050);
+			NyaHookLib::Patch(0x983050, &GetVehicleKeyHooked);
+		}
 	}
 }
