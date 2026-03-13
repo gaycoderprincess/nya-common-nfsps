@@ -35,8 +35,10 @@ enum BluePrintType {
 
 typedef uint32_t HSIMABLE__;
 typedef uint32_t HCAUSE__;
+typedef uint32_t HSIMPROFILE__;
 typedef HSIMABLE__* HSIMABLE;
 typedef HCAUSE__* HCAUSE;
+typedef HSIMPROFILE__* HSIMPROFILE;
 
 namespace Hermes {
 	typedef uint32_t _h_HHANDLER__;
@@ -68,7 +70,13 @@ namespace Hermes {
 #include "types/IVehicle.h"
 #include "types/IPlayer.h"
 #include "types/ITransmission.h"
+#include "types/ITiptronic.h"
+#include "types/IInductable.h"
 #include "types/IEngine.h"
+#include "types/IRaceEngine.h"
+#include "types/IEngineDamage.h"
+#include "types/ISteeringWheel.h"
+#include "types/IChassis.h"
 #include "types/IInput.h"
 #include "types/IRigidBody.h"
 #include "types/IRBVehicle.h"
@@ -89,6 +97,8 @@ namespace Hermes {
 #include "types/Camera.h"
 #include "types/eView.h"
 #include "types/Event.h"
+#include "types/VehicleBehavior.h"
+#include "types/FastMem.h"
 
 class TableBase {
 public:
