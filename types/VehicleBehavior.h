@@ -2,10 +2,10 @@
 class PhysicsObject {
 public:
 	uintptr_t vtable;
-	uint8_t _4[0x20];
+	uint8_t _4[0x4];
 	UCOM::Object Object;
 };
-static_assert(offsetof(PhysicsObject, Object) == 0x24);
+static_assert(offsetof(PhysicsObject, Object) == 0x8);
 
 namespace Sim {
 	class IServiceable {

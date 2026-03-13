@@ -20,6 +20,7 @@ public:
 	virtual bool HasNOS();
 	virtual void ChargeNOS();
 	virtual int GetNOSNumStages();
+	virtual void unknown(Attrib::Collection*);
 	virtual float GetMaxHorsePower();
 	virtual float GetMinHorsePower();
 	virtual float GetHorsePower();

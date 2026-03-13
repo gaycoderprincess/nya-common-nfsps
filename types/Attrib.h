@@ -25,6 +25,9 @@ namespace Attrib {
 	public:
 		unsigned int mKey;
 		ClassPrivate* mPrivates;
+
+		auto GetFirstCollection() { auto f = (uint32_t(__thiscall*)(Class*))0x52C890; return f(this); }
+		auto GetNextCollection(uint32_t prev) { auto f = (uint32_t(__thiscall*)(Class*, uint32_t))0x52C8B0; return f(this, prev); }
 	};
 
 	class ClassPrivate : public Class {
@@ -35,6 +38,13 @@ namespace Attrib {
 		Definition* mDefinitions;
 		Vault* mSource;
 		void* mStaticData;
+	};
+
+	class Database {
+	public:
+		static inline auto& sThis = *(Database**)0xAB0E60;
+
+		auto GetClass(uint32_t k) { auto f = (Class*(__thiscall*)(Database*, uint32_t))0x52CA70; return f(this, k); }
 	};
 
 	class Array {

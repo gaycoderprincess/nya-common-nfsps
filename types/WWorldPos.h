@@ -38,3 +38,5 @@ public:
 
 	static inline auto Update = (bool(__thiscall*)(WWorldPos*, UMath::Vector3* pos, UMath::Vector4* dest, bool usecache, const WCollider* collider, bool keep_valid))0x7AC6D0;
 };
+static_assert(offsetof(WWorldPos, fYOffset) == 0x34);
+static_assert(offsetof(WWorldPos, fSurface) == 0x38);

@@ -129,24 +129,16 @@ namespace Attrib {
 		class vehicle : public Attrib::Instance {
 		public:
 			struct _LayoutStruct {
-				UMath::Vector4 TENSOR_SCALE;
-				Curve UPSHIFT_THROTTLE;
-				Curve UPSHIFT_CLUTCH;
-				Curve TORQUE;
-				Curve DOWNSHIFT_THROTTLE;
-				Curve DOWNSHIFT_CLUTCH;
-				Attrib::RefSpec FORCED_INDUCTION;
-				AxlePair Tw;
-				AxlePair TRAVEL;
-				AxlePair TRACK_WIDTH;
+				uint8_t _0[0x108];
+				AxlePair TRACK_WIDTH; // +108
 				AxlePair Tp;
 				AxlePair SWAYBAR_STIFFNESS;
 				AxlePair SPRING_STIFFNESS;
 				AxlePair SPRING_PROGRESSION;
 				AxlePair SHOCK_VALVING;
 				AxlePair SHOCK_DIGRESSION;
-				AxlePair SECTION_WIDTH;
-				AxlePair RIM_SIZE;
+				AxlePair SECTION_WIDTH; // +140
+				AxlePair RIM_SIZE; // +148
 				AxlePair RIDE_HEIGHT;
 				AxlePair Kmu;
 				AxlePair Ka;
@@ -164,7 +156,7 @@ namespace Attrib {
 				AxlePair A2;
 				AxlePair A1;
 				AxlePair A0;
-				float WHEEL_BASE;
+				float WHEEL_BASE; // +1D8
 				float TORQUE_SPLIT;
 				float TORQUE_SLIP_SLOPE0;
 				float TANK_SLAPPER_TIMER;
@@ -193,23 +185,13 @@ namespace Attrib {
 				float HIGH_BOOST;
 				float GROUNDEFFECT_HEIGHT_RATIO;
 				float FRONT_WEIGHT_BIAS;
-				float FRONT_AXLE;
-				float FLYWHEEL_MASS;
-				float FINAL_GEAR;
-				float EBRAKE;
-				float DYNAMIC_ROLL_CENTER_MIN_ANGLE;
-				float DYNAMIC_ROLL_CENTER_MAX_ANGLE;
-				float DYNAMIC_ROLL_CENTER_CORRECTION;
-				float DRAG_COEFFICIENT;
-				float COUNTER_STEER_MIN_ANGLE;
-				float CLUTCH_SLIP;
-				float CASTER;
-				float AERO_COEFFICIENT_MAX_LIFT;
-				float AERO_COEFFICIENT_MAX_GROUND_EFFECT;
-				float AERO_COEFFICIENT_90_DEG_LOSS;
-				float AERO_COEFFICIENT;
-				float AERO_CG;
+				float FRONT_AXLE; // +24C
 			};
+			static_assert(offsetof(_LayoutStruct, WHEEL_BASE) == 0x1D8);
+			static_assert(offsetof(_LayoutStruct, TRACK_WIDTH) == 0x108);
+			static_assert(offsetof(_LayoutStruct, SECTION_WIDTH) == 0x140);
+			static_assert(offsetof(_LayoutStruct, FRONT_AXLE) == 0x24C);
+			static_assert(offsetof(_LayoutStruct, RIM_SIZE) == 0x148);
 
 			vehicle(uint32_t collectionKey) {
 				((vehicle*(__thiscall*)(vehicle*, uint32_t))0x49CD50)(this, collectionKey);
