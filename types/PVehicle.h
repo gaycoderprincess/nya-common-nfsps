@@ -32,3 +32,15 @@ class PVehicle {
 public:
 	static inline auto Construct = (ISimable*(__cdecl*)(Sim::Param params))0x72FBC0;
 };
+
+auto& BEHAVIOR_MECHANIC_AI = *(Attrib::StringKey*)0xACDE4C;
+auto& BEHAVIOR_MECHANIC_AUDIO = *(Attrib::StringKey*)0xACDDF8;
+auto& BEHAVIOR_MECHANIC_DAMAGE = *(Attrib::StringKey*)0xACDE58;
+auto& BEHAVIOR_MECHANIC_DAMAGEPHYSICS = *(Attrib::StringKey*)0xACDD94;
+auto& BEHAVIOR_MECHANIC_DRAW = *(Attrib::StringKey*)0xACDE00;
+auto& BEHAVIOR_MECHANIC_EFFECTS = *(Attrib::StringKey*)0xACDE24;
+auto& BEHAVIOR_MECHANIC_ENGINE = *(Attrib::StringKey*)0xACDDE0;
+auto& BEHAVIOR_MECHANIC_INPUT = *(Attrib::StringKey*)0xACDD9C;
+auto& BEHAVIOR_MECHANIC_RESET = *(Attrib::StringKey*)0xACDE40;
+auto& BEHAVIOR_MECHANIC_RIGIDBODY = *(Attrib::StringKey*)0xACDE38;
+auto& BEHAVIOR_MECHANIC_SUSPENSION = *(Attrib::StringKey*)0xACDE70;
