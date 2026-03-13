@@ -1,8 +1,3 @@
-class VehicleCustomizations {
-public:
-	uint8_t _0[0x7B4];
-};
-
 class FECarRecord {
 public:
 	uint32_t Handle; // +0

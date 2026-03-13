@@ -2,6 +2,24 @@ namespace Attrib {
 	class Vault;
 	class Definition;
 	class ClassPrivate;
+	class Collection;
+
+	struct Private {
+		uint8_t mData[8];
+	};
+
+	class StringKey {
+	public:
+		unsigned int mHash32;
+		const char *mString;
+	};
+
+	class RefSpec {
+	public:
+		unsigned int mClassKey;
+		unsigned int mCollectionKey;
+		const Collection *mCollectionPtr;
+	};
 
 	class Class {
 	public:

@@ -50,10 +50,13 @@ namespace Hermes {
 #include "types/SimSystem.h"
 #include "types/cFEng.h"
 #include "types/Attrib.h"
+#include "types/GRace.h"
+#include "types/AttribGen.h"
 #include "types/Physics.h"
 #include "types/VinylSystem.h"
 #include "types/PresetSkin.h"
 #include "types/RideInfo.h"
+#include "types/VehicleCustomizations.h"
 #include "types/FEPlayerCarDB.h"
 #include "types/FeGarageMain.h"
 #include "types/PlayerSettings.h"
@@ -77,7 +80,6 @@ namespace Hermes {
 #include "types/IDamageableVehicle.h"
 #include "types/DriftScoring.h"
 #include "types/GTrigger.h"
-#include "types/GRace.h"
 #include "types/GRaceParameters.h"
 #include "types/GRaceDatabase.h"
 #include "types/GRaceStatus.h"
@@ -87,6 +89,40 @@ namespace Hermes {
 #include "types/Camera.h"
 #include "types/eView.h"
 #include "types/Event.h"
+
+class TableBase {
+public:
+	int NumEntries;
+	float MinArg;
+	float MaxArg;
+	float IndexMultiplier;
+
+	TableBase() {}
+
+	TableBase(int num, float min, float max) {
+		NumEntries = num;
+		MinArg = min;
+		MaxArg = max;
+		IndexMultiplier = (NumEntries - 1) / (MaxArg - MinArg);
+	}
+};
+
+class Table : public TableBase {
+public:
+	const float* pTable;
+
+	Table(const float *table, int num, float min, float max) : TableBase(num, min, max), pTable(table) {}
+
+	Table(const float* table, int numEntries, float minArg, float maxArg, float indexMultiplier) {
+		pTable = table;
+		NumEntries = numEntries;
+		MinArg = minArg;
+		MaxArg = maxArg;
+		IndexMultiplier = indexMultiplier;
+	}
+
+	float GetValue(float input); // todo does this exist in ps?
+};
 
 class DALPauseStates {
 public:
