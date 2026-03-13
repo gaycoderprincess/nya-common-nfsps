@@ -1,4 +1,12 @@
-class PhysicsObject;
+// todo this is horrible and inaccurate
+class PhysicsObject {
+public:
+	uintptr_t vtable;
+	uint8_t _4[0x20];
+	UCOM::Object Object;
+};
+static_assert(offsetof(PhysicsObject, Object) == 0x24);
+
 namespace Sim {
 	class IServiceable {
 	public:

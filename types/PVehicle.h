@@ -30,8 +30,17 @@ static_assert(sizeof(VehicleParams) == 0x3C);
 
 class PVehicle {
 public:
+	uint8_t _0[0x14C];
+	DriverClass mDriverClass;
+
 	static inline auto Construct = (ISimable*(__cdecl*)(Sim::Param params))0x72FBC0;
+
+	auto LookupBehaviorSignature(UCrc32 *result, const Attrib::StringKey *mechanic) {
+		auto f = (UCrc32*(__thiscall*)(PVehicle*, UCrc32 *result, const Attrib::StringKey *mechanic))0x71FD60;
+		return f(this, result, mechanic);
+	}
 };
+static_assert(offsetof(PVehicle, mDriverClass) == 0x14C);
 
 auto& BEHAVIOR_MECHANIC_AI = *(Attrib::StringKey*)0xACDE4C;
 auto& BEHAVIOR_MECHANIC_AUDIO = *(Attrib::StringKey*)0xACDDF8;
