@@ -129,7 +129,8 @@ namespace Attrib {
 		class vehicle : public Attrib::Instance {
 		public:
 			struct _LayoutStruct {
-				uint8_t _0[0x108];
+				UMath::Vector4 TENSOR_SCALE; // +0
+				uint8_t _10[0xF8];
 				AxlePair TRACK_WIDTH; // +108
 				AxlePair Tp;
 				AxlePair SWAYBAR_STIFFNESS;
@@ -186,6 +187,21 @@ namespace Attrib {
 				float GROUNDEFFECT_HEIGHT_RATIO;
 				float FRONT_WEIGHT_BIAS;
 				float FRONT_AXLE; // +24C
+				float FLYWHEEL_MASS;
+				float FINAL_GEAR;
+				float EBRAKE;
+				float DYNAMIC_ROLL_CENTER_MIN_ANGLE;
+				float DYNAMIC_ROLL_CENTER_MAX_ANGLE;
+				float DYNAMIC_ROLL_CENTER_CORRECTION;
+				float DRAG_COEFFICIENT;
+				float COUNTER_STEER_MIN_ANGLE;
+				float CLUTCH_SLIP;
+				float CASTER;
+				float AERO_COEFFICIENT_MAX_LIFT;
+				float AERO_COEFFICIENT_MAX_GROUND_EFFECT;
+				float AERO_COEFFICIENT_90_DEG_LOSS;
+				float AERO_COEFFICIENT;
+				float AERO_CG;
 			};
 			static_assert(offsetof(_LayoutStruct, WHEEL_BASE) == 0x1D8);
 			static_assert(offsetof(_LayoutStruct, TRACK_WIDTH) == 0x108);

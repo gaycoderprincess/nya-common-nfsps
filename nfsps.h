@@ -84,6 +84,7 @@ namespace Hermes {
 #include "types/ICollisionBody.h"
 #include "types/IRBVehicle.h"
 #include "types/ISpikeable.h"
+#include "types/ICheater.h"
 #include "types/IVehicleCache.h"
 #include "types/IHumanAI.h"
 #include "types/ISelectionSet.h"

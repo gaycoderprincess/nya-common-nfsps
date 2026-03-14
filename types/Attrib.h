@@ -97,6 +97,9 @@ namespace Attrib {
 		//~Instance() {
 		//	((void(__thiscall*)(Instance*))0x5301F0)(this);
 		//}
+		void dtor() {
+			((void(__thiscall*)(Instance*))0x5301F0)(this);
+		}
 
 		static inline auto GetAttributePointer = (void*(__thiscall*)(Instance*, uint32_t attributeKey, uint32_t index))0x52B950;
 	};
