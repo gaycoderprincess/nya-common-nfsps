@@ -236,5 +236,7 @@ public:
 	uint8_t MorphValues[41][11];
 	float PhysicsTuning[32];
 	int Type;
+
+	static inline auto GetInstalledPart = (bool(__thiscall*)(VehicleCustomizations*, CAR_SLOT_ID, int, DBCarPart*))0x782F70;
 };
 static_assert(sizeof(VehicleCustomizations) == 0x7B4);

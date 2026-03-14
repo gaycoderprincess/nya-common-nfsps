@@ -43,4 +43,6 @@ public:
 	int LastDisparateTime;
 	int RenderDash;
 	float NoiseIntensity;
+
+	static inline auto SetCameraMatrix = (void(__thiscall*)(Camera*, const bMatrix4* m, float fTime))0x640FC0;
 };

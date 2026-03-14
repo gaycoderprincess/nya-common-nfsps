@@ -199,4 +199,6 @@ auto& SkipNISs = *(bool*)0xBFBC28;
 auto& GameWindow = *(HWND*)0xAC6ED8;
 auto& GameD3DDevice = *(IDirect3DDevice9***)0xAC6ED4;
 
+class CameraMover;
+
 #include "nfspshooks.h"

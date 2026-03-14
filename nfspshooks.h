@@ -16,13 +16,13 @@ namespace NyaHooks {
 			}
 			return out;
 		}
-		
+
 		void Init() {
 			if (OrigFunction) return;
 			OrigFunction = (uint32_t(__thiscall*)(void*))NyaHookLib::PatchRelative(NyaHookLib::CALL, 0x4B0A8F, &HookedFunction);
 		}
 	}
-	
+
 	namespace D3DResetHook {
 		std::vector<void(*)()> aFunctions;
 
@@ -102,6 +102,25 @@ namespace NyaHooks {
 			NyaHookLib::Patch(0x70E2B4, &HookedFunction);
 		}
 	}
+
+	namespace CameraMoverHook {
+		std::vector<void(*)(CameraMover*)> aFunctions;
+
+		auto OrigFunction = (void(__thiscall*)(CameraMover*, float))nullptr;
+		void __thiscall HookedFunction(CameraMover* a1, float a2) {
+			OrigFunction(a1, a2);
+			for (auto& func : aFunctions) {
+				func(a1);
+			}
+		}
+
+		void Init() {
+			if (OrigFunction) return;
+			OrigFunction = (void(__thiscall*)(CameraMover*, float))(*(uintptr_t*)0x981BE4);
+			NyaHookLib::Patch(0x981BE4, &HookedFunction);
+		}
+	}
+
 	namespace LateInitHook {
 		std::vector<void(*)()> aPreFunctions;
 		std::vector<void(*)()> aFunctions;
@@ -122,7 +141,7 @@ namespace NyaHooks {
 			OrigFunction = (void(*)(int, char**))NyaHookLib::PatchRelative(NyaHookLib::CALL, 0x6DBAD4, &HookedFunction);
 		}
 	}
-	
+
 	namespace SimServiceHook {
 		std::vector<void(*)()> aFunctions;
 

@@ -1,6 +1,7 @@
 class IAttachmentSystem;
 
 class DBCarPart {
+public:
 	bool isValid;
 	uint8_t CarTypeNameHashIndex;
 	uint16_t AttributeTableOffset;
@@ -12,6 +13,7 @@ class DBCarPart {
 static_assert(sizeof(DBCarPart) == 0x10);
 
 class CarPaintPartRecord {
+public:
 	uint32_t paint_group;
 	uint32_t baseHue;
 	float saturation;
@@ -20,6 +22,7 @@ class CarPaintPartRecord {
 static_assert(sizeof(CarPaintPartRecord) == 0x10);
 
 class CarPaintPart {
+public:
 	uint32_t resultLightMaterial;
 	CarPaintPartRecord paintRecord;
 	bool valid;
@@ -35,6 +38,7 @@ public:
 static_assert(sizeof(VinylColorPartInfo) == 0x14);
 
 class VinylLayerPartInfo {
+public:
 	DBCarPart vinyl;
 	VinylColorPartInfo colors[4];
 	VinylSystem::VinylTransformPacked transform;
@@ -42,6 +46,7 @@ class VinylLayerPartInfo {
 static_assert(sizeof(VinylLayerPartInfo) == 0x68);
 
 class DecalLayerPartInfo {
+public:
 	DBCarPart decal;
 	VinylSystem::VinylTransformPacked transform;
 	VinylColorPartInfo color;
