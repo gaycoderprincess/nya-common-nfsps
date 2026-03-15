@@ -214,11 +214,47 @@ public:
 class RideInfo;
 class VehicleCustomizations {
 public:
+	// NOTE: not a real enum!
+	enum ePhysicsTuning {
+		BRAKE_BIAS = 0, // -1.0 front 1.0 rear
+		BRAKE_PRESSURE = 1, // -1.0 low 1.0 high
+		CAMBER = 2, // -1.0 positive 1.0 negative
+		CASTER = 3, // -1.0 positive 1.0 negative
+		DRAG_VS_DOWNFORCE = 4, // unused?
+		END_BOOST = 5, // -1.0 low 1.0 high
+		GEAR_RATIO_5 = 6, // -1.0 short 1.0 tall
+		GEAR_RATIO_FINAL = 7, // -1.0 short 1.0 tall
+		GEAR_RATIO_1 = 8, // -1.0 short 1.0 tall
+		GEAR_RATIO_4 = 9, // -1.0 short 1.0 tall
+		RIDE_HEIGHT = 10, // -1.0 low 1.0 high
+		FRONT_ROLL_BAR_STIFFNESS = 11, // -1.0 soft 1.0 stiff
+		FRONT_SHOCK_COMPRESSION_RATE = 12, // -1.0 soft 1.0 stiff
+		FRONT_SHOCK_REBOUND_RATE = 13, // -1.0 soft 1.0 stiff
+		FRONT_SPRING_RATE = 14, // -1.0 soft 1.0 stiff
+		FRONT_TIRE_PRESSURE = 15, // -1.0 soft 1.0 stiff
+		HANDBRAKE_PRESSURE = 16, // -1.0 low 1.0 high
+		NITROUS_PRESSURE = 17, // -1.0 low 1.0 high
+		NITROUS_JETTING_FLOW_RATE = 18, // -1.0 low 1.0 high
+		REAR_RIDE_HEIGHT = 19, // unused?
+		REAR_ROLL_BAR_STIFFNESS = 20, // -1.0 soft 1.0 stiff
+		REAR_SHOCK_COMPRESSION_RATE = 21, // -1.0 soft 1.0 stiff
+		REAR_SHOCK_REBOUND_RATE = 22, // -1.0 soft 1.0 stiff
+		REAR_SPRING_RATE = 23, // -1.0 soft 1.0 stiff
+		REAR_TIRE_PRESSURE = 24, // -1.0 soft 1.0 stiff
+		GEAR_RATIO_2 = 25, // -1.0 short 1.0 tall
+		GEAR_RATIO_6 = 26, // -1.0 short 1.0 tall
+		START_BOOST = 27, // -1.0 low 1.0 high
+		STEERING_RESPONSE_RATIO = 28, // -1.0 loose 1.0 stiff
+		GEAR_RATIO_3 = 29, // -1.0 short 1.0 tall
+		TOE = 30, // -1.0 positive 1.0 negative
+		CAM_TIMING = 31, // -1.0 retard 1.0 advance
+	};
+
 	int16_t GUID[5];
 	unsigned int creatorId;
 	char creatorName[32];
 	unsigned int shareNumber;
-	int16_t InstalledParts[165];
+	int16_t InstalledParts[CARSLOTID_NUM];
 	uint8_t customPaintsValid[12];
 	CarPaintPartRecordPacked customPaints[12];
 	uint8_t partBaseMaterials[12];
