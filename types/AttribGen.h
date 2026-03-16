@@ -135,7 +135,7 @@ namespace Attrib {
 			};
 
 			pvehicle(uint32_t collectionKey) {
-				((pvehicle*(__thiscall*)(pvehicle*, uint32_t))0x49CC70)(this, collectionKey);
+				ctor(Attrib::FindCollection(Attrib::StringHash32("pvehicle"), collectionKey), 0);
 			}
 			~pvehicle() {
 				dtor();
@@ -230,7 +230,7 @@ namespace Attrib {
 			static_assert(offsetof(_LayoutStruct, RIM_SIZE) == 0x148);
 
 			vehicle(uint32_t collectionKey) {
-				((vehicle*(__thiscall*)(vehicle*, uint32_t))0x49CD50)(this, collectionKey);
+				ctor(Attrib::FindCollection(Attrib::StringHash32("vehicle"), collectionKey), 0);
 			}
 			~vehicle() {
 				dtor();
@@ -443,6 +443,9 @@ namespace Attrib {
 
 			simsurface() {
 				((simsurface*(__thiscall*)(simsurface*))0x4CD2F0)(this);
+			}
+			simsurface(uint32_t collectionKey) {
+				ctor(Attrib::FindCollection(Attrib::StringHash32("simsurface"), collectionKey), 0);
 			}
 			//simsurface(const Attrib::Collection *collection, uint32_t msgPort) {
 			//	((simsurface*(__thiscall*)(simsurface*, const Attrib::Collection*, uint32_t))0x)(this, collection, msgPort);

@@ -183,6 +183,7 @@ auto& SkipFEBrakingAssistLevel = *(int*)0xA9D9E0;
 
 auto& Tweak_TotalledDamage = *(float*)0xA5C5B4;
 
+auto bStringHash = (uint32_t(*)(const char*))0x436680;
 auto bInitTicker = (void(*)(float))0x430F30;
 
 auto LZDecompress = (uint32_t(*)(uint8_t* pSrc, uint8_t* pDst))0x6CFDF0;
