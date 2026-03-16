@@ -37,10 +37,12 @@ typedef uint32_t HSIMABLE__;
 typedef uint32_t HCAUSE__;
 typedef uint32_t HSIMPROFILE__;
 typedef uint32_t HCOLPRIM__;
+typedef uint32_t HSIMSERVICE__;
 typedef HSIMABLE__* HSIMABLE;
 typedef HCAUSE__* HCAUSE;
 typedef HSIMPROFILE__* HSIMPROFILE;
 typedef HCOLPRIM__* HCOLPRIM;
+typedef HSIMSERVICE__* HSIMSERVICE;
 
 namespace Hermes {
 	typedef uint32_t _h_HHANDLER__;
@@ -51,7 +53,6 @@ namespace Hermes {
 #include "types/UCOM.h"
 #include "types/ListableSet.h"
 #include "types/UMath.h"
-#include "types/SimSystem.h"
 #include "types/cFEng.h"
 #include "types/Attrib.h"
 #include "types/GRace.h"
@@ -66,6 +67,7 @@ namespace Hermes {
 #include "types/PlayerSettings.h"
 #include "types/UserProfile.h"
 #include "types/GameFlowManager.h"
+#include "types/SimSystem.h"
 #include "types/TrackInfo.h"
 #include "types/IAttachable.h"
 #include "types/ISimable.h"
@@ -105,6 +107,8 @@ namespace Hermes {
 #include "types/VehicleBehavior.h"
 #include "types/FastMem.h"
 #include "types/WWorldPos.h"
+#include "types/StringRecord.h"
+#include "types/CarTypeInfo.h"
 
 class SimSurface : public Attrib::Gen::simsurface {
 public:

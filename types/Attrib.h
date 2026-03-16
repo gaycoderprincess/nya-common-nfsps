@@ -97,6 +97,9 @@ namespace Attrib {
 		//~Instance() {
 		//	((void(__thiscall*)(Instance*))0x5301F0)(this);
 		//}
+		void ctor(const Collection* collection, uint32_t msgPort) {
+			((Instance*(__thiscall*)(Instance*, const Collection*, uint32_t))0x52AA00)(this, collection, msgPort);
+		}
 		void dtor() {
 			((void(__thiscall*)(Instance*))0x5301F0)(this);
 		}
@@ -104,6 +107,7 @@ namespace Attrib {
 		static inline auto GetAttributePointer = (void*(__thiscall*)(Instance*, uint32_t attributeKey, uint32_t index))0x52B950;
 	};
 
-	auto FindCollection = (Collection*(__cdecl*)(uint32_t classKey, uint32_t collectionKey))0x52CD40;
-	auto StringHash32 = (uint32_t(__cdecl*)(const char*))0x52B8D0;
+	auto FindCollection = (Collection*(*)(uint32_t classKey, uint32_t collectionKey))0x52CD40;
+	auto StringHash32 = (uint32_t(*)(const char*))0x52B8D0;
+	auto StringToLowerCaseKey = (uint32_t(*)(const char*))0x52B9C0;
 };
