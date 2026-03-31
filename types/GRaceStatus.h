@@ -500,5 +500,6 @@ public:
 };
 static_assert(sizeof(GRaceStatus) == 0x45D0);
 static_assert(offsetof(GRaceStatus, mRacerInfo) == 0x20);
+static_assert(offsetof(GRaceStatus, mRacerCount) == 0x2CE0);
 
 auto GetOpponentDamage = (float(*)(ISimable*))0x674F30;

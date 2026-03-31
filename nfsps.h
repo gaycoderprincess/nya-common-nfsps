@@ -186,6 +186,10 @@ auto& Tweak_TotalledDamage = *(float*)0xA5C5B4;
 auto bStringHash = (uint32_t(*)(const char*))0x436680;
 auto bInitTicker = (void(*)(float))0x430F30;
 
+class SlotPool;
+auto bNewSlotPool = (SlotPool*(*)(int slot_size, int num_slots, const char *debug_name, int memory_pool))0x4337A0;
+auto& CarLoaderPoolSizes = *(uint32_t*)0xA60DE4;
+
 auto LZDecompress = (uint32_t(*)(uint8_t* pSrc, uint8_t* pDst))0x6CFDF0;
 auto HUFF_encode = (uint32_t(*)(void *compresseddata, const void *source, uint32_t sourcesize))0x6CFBB0;
 uint32_t HUFFCompress(uint8_t *pSrc, uint32_t Size, uint8_t *pDest) {
